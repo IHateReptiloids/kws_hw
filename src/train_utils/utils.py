@@ -28,7 +28,7 @@ def train(n_epochs, model, opt, loaders, wave2specs, device, make_plots=True):
             best_model = model.state_dict()
         if make_plots:
             clear_output()
-            plt.plot(val_history['val_metric'])
+            plt.plot(val_history)
             plt.ylabel('Metric')
             plt.xlabel('Epoch')
             plt.grid()
