@@ -1,6 +1,5 @@
 from pathlib import Path
 import shutil
-from typing import Callable, List, Optional, Union
 
 import pandas as pd
 from torch.utils.data import Dataset
@@ -13,10 +12,10 @@ URL = 'http://download.tensorflow.org/data/speech_commands_v0.01.tar.gz'
 class SpeechCommandsDataset(Dataset):
     def __init__(
         self,
-        transform: Optional[Callable] = None,
-        path2dir: str = None,
-        keywords: Union[str, List[str]] = None,
-        csv: Optional[pd.DataFrame] = None
+        transform=None,
+        path2dir=None,
+        keywords=None,
+        csv=None
     ):
         if path2dir is None and csv is None:
             raise ValueError('You must specify either path2dir or csv')
