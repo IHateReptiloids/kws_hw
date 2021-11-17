@@ -1,10 +1,8 @@
 from pathlib import Path
-from typing import List
 
 import torch
 from torch import distributions
 import torchaudio
-
 
 DEFAULT_NOISES = [
     'white_noise.wav',
@@ -15,11 +13,13 @@ DEFAULT_NOISES = [
     'running_tap.wav'
 ]
 
+
 class DefaultWaveAugmentations:
     def __init__(self, data_dir: str):
         data_dir = Path(data_dir)
         self.noises = [
-            torchaudio.load(str(data_dir / '_background_noise_' / noise))[0].squeeze()
+            torchaudio.load(str(data_dir / '_background_noise_' / noise))[0]
+            .squeeze()
             for noise in DEFAULT_NOISES
         ]
 
@@ -48,10 +48,11 @@ class DefaultWaveAugmentations:
         return audio_new
 
     def __call__(self, wav):
-        aug_num = torch.randint(low=0, high=4, size=(1,)).item()   # choose 1 random aug from augs
+        aug_num = torch.randint(low=0, high=4, size=(1,)).item()
         augs = [
             lambda x: x,
-            lambda x: (x + distributions.Normal(0, 0.01).sample(x.size())).clamp_(-1, 1),
+            lambda x: (x + distributions.Normal(0, 0.01).sample(x.size()))
+            .clamp_(-1, 1),
             lambda x: torchaudio.transforms.Vol(.25)(x),
             lambda x: self.add_rand_noise(x)
         ]

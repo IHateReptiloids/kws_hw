@@ -72,10 +72,8 @@ def validation(model, loader, wave2spec, device):
 
         output = model(batch)
         probs = F.softmax(output, dim=-1)
-        loss = F.cross_entropy(output, labels)
 
         # logging
-        argmax_probs = torch.argmax(probs, dim=-1)
         all_probs.append(probs[:, 1].cpu())
         all_labels.append(labels.cpu())
 

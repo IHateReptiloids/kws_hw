@@ -11,7 +11,7 @@ class Attention(torch.nn.Module):
             torch.nn.Tanh(),
             torch.nn.Linear(hidden_size, 1)
         )
-    
+
     def forward(self, input):
         energy = self.energy(input)
         alpha = torch.softmax(energy, dim=-2)

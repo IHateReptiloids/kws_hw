@@ -7,8 +7,8 @@ from torch.utils.data import Dataset
 import torchaudio
 import wget
 
-
 URL = 'http://download.tensorflow.org/data/speech_commands_v0.01.tar.gz'
+
 
 class SpeechCommandsDataset(Dataset):
     def __init__(
@@ -30,7 +30,7 @@ class SpeechCommandsDataset(Dataset):
 
         if csv is None:
             keywords = keywords if isinstance(keywords, list) else [keywords]
-            
+
             all_keywords = [
                 p.stem for p in path2dir.glob('*')
                 if p.is_dir() and not p.stem.startswith('_')
@@ -45,21 +45,21 @@ class SpeechCommandsDataset(Dataset):
                 else:
                     for path2wav in paths:
                         triplets.append((path2wav.as_posix(), keyword, 0))
-            
+
             self.csv = pd.DataFrame(
                 triplets,
                 columns=['path', 'keyword', 'label']
             )
         else:
             self.csv = csv
-    
+
     def __getitem__(self, index: int):
         instance = self.csv.iloc[index]
 
         path2wav = instance['path']
         wav, sr = torchaudio.load(path2wav)
         wav = wav.sum(dim=0)
-        
+
         if self.transform:
             wav = self.transform(wav)
 

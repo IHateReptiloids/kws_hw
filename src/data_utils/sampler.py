@@ -9,5 +9,6 @@ def get_sampler(target):
     weight = 1. / class_sample_count
     samples_weight = np.array([weight[t] for t in target])
     samples_weight = torch.from_numpy(samples_weight)
-    sampler = WeightedRandomSampler(samples_weight.float(), len(samples_weight))
+    sampler = WeightedRandomSampler(samples_weight.float(),
+                                    len(samples_weight))
     return sampler

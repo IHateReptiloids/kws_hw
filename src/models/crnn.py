@@ -19,7 +19,7 @@ class CRNN(nn.Module):
 
         self.conv_out_frequency = (config.n_mels - config.kernel_size[0]) // \
             config.stride[0] + 1
-        
+
         self.gru = nn.GRU(
             input_size=self.conv_out_frequency * config.cnn_out_channels,
             hidden_size=config.hidden_size,
@@ -31,7 +31,7 @@ class CRNN(nn.Module):
 
         self.attention = Attention(config.hidden_size)
         self.classifier = nn.Linear(config.hidden_size, config.num_classes)
-    
+
     def forward(self, input):
         input = input.unsqueeze(dim=1)
         conv_output = self.conv(input).transpose(-1, -2)
