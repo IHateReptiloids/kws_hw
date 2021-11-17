@@ -29,8 +29,9 @@ class CRNN(nn.Module):
             batch_first=True
         )
 
-        self.attention = Attention(config.hidden_size)
-        self.classifier = nn.Linear(config.hidden_size, config.num_classes)
+        context_dim = (int(config.bidirectional) + 1) * config.hidden_size
+        self.attention = Attention(context_dim)
+        self.classifier = nn.Linear(context_dim, config.num_classes)
 
     def forward(self, input):
         input = input.unsqueeze(dim=1)
