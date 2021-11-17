@@ -56,6 +56,7 @@ class BaseTrainer:
                 plt.grid()
                 plt.show()
             print('END OF EPOCH', n)
+        return val_history
 
     def train_mode(self):
         '''
