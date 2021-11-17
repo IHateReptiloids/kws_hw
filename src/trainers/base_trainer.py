@@ -7,9 +7,8 @@ from src.metrics import get_au_fa_fr
 
 
 class BaseTrainer:
-    def __init__(self, n_epochs, opt, train_loader, val_loader=None,
+    def __init__(self, opt, train_loader, val_loader=None,
                  device=torch.device('cpu'), max_grad_norm=5.0):
-        self.n_epochs = n_epochs
         self.opt = opt
         self.train_loader = train_loader
         self.val_loader = val_loader
@@ -37,12 +36,12 @@ class BaseTrainer:
         '''
         raise NotImplementedError
 
-    def train(self, make_plots=True):
+    def train(self, n_epochs, make_plots=True):
         if make_plots:
             from IPython.display import clear_output
             import matplotlib.pyplot as plt
         val_history = []
-        for n in range(1, self.n_epochs + 1):
+        for n in range(1, n_epochs + 1):
             self.train_epoch()
             au_fa_fr = self.validation()
             val_history.append(au_fa_fr)

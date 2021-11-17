@@ -10,7 +10,6 @@ class DefaultTrainer(BaseTrainer):
     def __init__(
         self,
         *,
-        n_epochs,
         opt,
         train_loader,
         val_loader,
@@ -23,7 +22,6 @@ class DefaultTrainer(BaseTrainer):
         self.train_wave2spec = train_wave2spec
         self.val_wave2spec = val_wave2spec
         super().__init__(
-            n_epochs,
             opt,
             train_loader,
             val_loader,
