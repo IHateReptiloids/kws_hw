@@ -17,6 +17,9 @@ class SpeechCommandsDataset(torch.utils.data.Dataset):
         keywords=None,
         csv=None
     ):
+        if keywords is None and csv is None:
+            raise ValueError('You must specify either keywords or csv')
+
         self.transform = transform
 
         path2dir = Path(path2dir)
