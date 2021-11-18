@@ -42,8 +42,8 @@ setuptools-scm==6.3.2
 six==1.16.0
 toml==0.10.2
 tomli==1.2.2
-torch==1.9.1
-torchaudio==0.9.1
+torch==1.10.0
+torchaudio==0.10.0
 tornado==6.1
 tqdm==4.62.3
 traitlets==5.1.1

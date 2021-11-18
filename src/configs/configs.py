@@ -22,3 +22,9 @@ class DefaultConfig:
     sample_rate: int = 16000
     device: torch.device = torch.device(
         'cuda:0' if torch.cuda.is_available() else 'cpu')
+
+
+@dataclasses.dataclass
+class DistillationConfig(DefaultConfig):
+    temp: float = 4.0
+    alpha: float = 0.5
