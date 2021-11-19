@@ -1,5 +1,3 @@
-import random
-
 import torch
 
 
@@ -15,8 +13,7 @@ def get_size_in_megabytes(model):
 
 
 def seed_all(seed=3407):
-    _ = torch.manual_seed(seed)
-    random.seed(seed)
+    g = torch.manual_seed(seed)
     torch.backends.cudnn.benchmark = False
     torch.use_deterministic_algorithms(True)
-    return seed
+    return g
