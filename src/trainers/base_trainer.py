@@ -55,7 +55,7 @@ class BaseTrainer:
                 plt.xlabel('Epoch')
                 plt.grid()
                 plt.show()
-            print('END OF EPOCH', n)
+            print(f'END OF EPOCH {n}, val metric: {au_fa_fr}')
         return val_history
 
     def train_mode(self):
